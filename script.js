@@ -1,5 +1,9 @@
 let allBooks = []
 let i = 0
+let f = 0
+
+const badge = document.getElementsByClassName('badge')[0]
+
 console.log(allBooks)
 const booklist = function () {
   fetch('https://striveschool-api.herokuapp.com/books')
@@ -47,6 +51,13 @@ const elimina = function (button) {
   button.closest('.col-4').remove()
 }
 
+const eliminacar = function (button) {
+  console.log(button)
+  button.closest('.dropdown-item').remove()
+  f = f - 1
+  badge.innerText = f
+}
+
 const add = function (button) {
   const bottone = button
   console.log(bottone)
@@ -61,5 +72,14 @@ const add = function (button) {
   newAdd.innerText = allBooks[contatore.innerText].title
   console.log(newAdd)
   cart.appendChild(newAdd)
+
+  const delate = document.createElement('div')
+  delate.innerHTML = ` 
+    <a href="#" onclick="eliminacar(this)"  class="btn btn-danger">Elimina</a>
+    `
+  newAdd.appendChild(delate)
+  f++
+  badge.innerText = f
 }
+
 booklist()
